@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+Hello!
+=======
+Hello world
+>>>>>>> conflict3
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git checkout conflict1
+Switched to branch 'conflict1'
+Your branch is up to date with 'origin/conflict1'.
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git merge conflict3
+CONFLICT (add/add): Merge conflict in conflict_file
+Auto-merging conflict_file
+Automatic merge failed; fix conflicts and then commit the result.
+kate@kate-ubuntu ~/gl-basecamp2020
+ % nano conflict_file
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git add conflict_file
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status           
+On branch conflict1
+Your branch is up to date with 'origin/conflict1'.
+
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+	modified:   conflict_file
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git commit -m 'fix merge conflict'
+[conflict1 8188026] fix merge conflict
