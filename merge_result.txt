@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+Hello!
+=======
+Hello world
+>>>>>>> conflict3
