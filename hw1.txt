@@ -1,0 +1,110 @@
+1. Move file from untracked to commit and the whole way back. Note: Do not skip any stage.
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % nano file_4_2
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status
+On branch new_branch_4
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	file_4_2
+
+nothing added to commit but untracked files present (use "git add" to track)
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git add .
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status
+On branch new_branch_4
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   file_4_2
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git commit -m 'file_4_2 commit'
+[new_branch_4 0c9da83] file_4_2 commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file_4_2
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git reset --soft HEAD~1
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status
+On branch new_branch_4
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   file_4_2
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git restore --staged file_4_2          
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status                   
+On branch new_branch_4
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	file_4_2
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+2. Create a branch from initial commit of master branch
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git checkout afca06e                      
+Note: switching to 'afca06e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at afca06e Initial commit
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git switch -c new_branch_5
+Switched to a new branch 'new_branch_5'
+
+
+3. Remove file from git repository only(leave it on file system)
+kate@kate-ubuntu ~/gl-basecamp2020
+ % nano file_4.txt
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git rm --cached file_4.txt                
+rm 'file_4.txt'
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status                
+On branch new_branch_4
+Your branch is ahead of 'origin/new_branch_4' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	deleted:    file_4.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	file_4.txt
+
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git commit -m 'deleting file_4.txt'
+[new_branch_4 47e1df3] deleting file_4.txt
+ 1 file changed, 3 deletions(-)
+ delete mode 100644 file_4.txt
+kate@kate-ubuntu ~/gl-basecamp2020
+ % git status                         
+On branch new_branch_4
+Your branch is ahead of 'origin/new_branch_4' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	file_4.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
