@@ -1,0 +1,63 @@
+1. Create path ~/f1/f2/f3/f4/f5/f6; Create and fill in text file in f1 folder; Copy it to f6 folder; Navigate to Home folder; Find copied file and remove it
+kate@kate-ubuntu ~ % mkdir -p ~/f1/f2/f3/f4/f5/f6
+kate@kate-ubuntu ~ % cd f1
+kate@kate-ubuntu ~/f1 % nano test_file.txt
+kate@kate-ubuntu ~/f1 % cp test_file.txt f2/f3/f4/f5/f6
+kate@kate-ubuntu ~/f1 % cd f2/f3/f4/f5/f6
+kate@kate-ubuntu ...f4/f5/f6 % ls
+test_file.txt
+kate@kate-ubuntu ~ % find ~ -iname test_file.txt       
+/home/kate/f1/f2/f3/f4/f5/f6/test_file.txt
+/home/kate/f1/test_file.txt
+kate@kate-ubuntu ~ % rm /home/kate/f1/f2/f3/f4/f5/f6/test_file.txt
+
+2. Redirect errors only output into separate file
+kate@kate-ubuntu ~/f1 % ls test_file.txt ttt.txt 2> test.log    
+test_file.txt
+kate@kate-ubuntu ~/f1 % cat test.log                        
+ls: cannot access 'ttt.txt': No such file or directory
+
+3. Redirect error and standart outputs into separate file
+kate@kate-ubuntu ~/f1 % ls test_file.txt ttt.txt > test.log 2>&1
+kate@kate-ubuntu ~/f1 % cat test.log
+ls: cannot access 'ttt.txt': No such file or directory
+test_file.txt
+
+4. Create file, change owner to root. Add permissions to execute file
+kate@kate-ubuntu ~/f1 % nano test_file2.txt
+kate@kate-ubuntu ~/f1 % sudo chown root test_file2.txt
+[sudo] password for kate: 
+kate@kate-ubuntu ~/f1 % ls -lah
+total 24K
+drwxrwxr-x  3 kate kate 4,0K лис  2 23:11 .
+drwxr-xr-x 17 kate kate 4,0K лис  2 23:17 ..
+drwxrwxr-x  3 kate kate 4,0K лис  2 15:12 f2
+-rw-rw-r--  1 root kate    9 лис  2 23:11 test_file2.txt
+-rw-rw-r--  1 kate kate   12 лис  2 15:14 test_file.txt
+-rw-rw-r--  1 kate kate   55 лис  2 17:11 test.log
+kate@kate-ubuntu ~/f1 % sudo chmod +x test_file2.txt
+kate@kate-ubuntu ~/f1 % ls -lah                     
+total 24K
+drwxrwxr-x  3 kate kate 4,0K лис  2 23:11 .
+drwxr-xr-x 17 kate kate 4,0K лис  2 23:18 ..
+drwxrwxr-x  3 kate kate 4,0K лис  2 15:12 f2
+-rwxrwxr-x  1 root kate    9 лис  2 23:11 test_file2.txt
+-rw-rw-r--  1 kate kate   12 лис  2 15:14 test_file.txt
+-rw-rw-r--  1 kate kate   55 лис  2 17:11 test.log
+
+5. make cmd2 executes only if cmd1 fails
+cmd1 || cmd2
+
+6. make cmd2 executes only if cmd1 successful
+cmd1 && cmd2
+
+7. Create and execute sh file that prints current folder. NOTE: Do not use any text redactor
+kate@kate-ubuntu ~/f1 % echo "echo \$PWD" > current_directory.sh
+kate@kate-ubuntu ~/f1 % cat current_directory.sh                
+echo $PWD
+kate@kate-ubuntu ~/f1 % chmod +x current_directory.sh
+kate@kate-ubuntu ~/f1 % ./current_directory.sh       
+/home/kate/f1
+kate@kate-ubuntu ~/f1 % cd 
+kate@kate-ubuntu ~ % /home/kate/f1/current_directory.sh
+/home/kate
